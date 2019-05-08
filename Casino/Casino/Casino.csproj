@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="CasinoContext.cs" />
     <Compile Include="CasinoRepository.cs" />
+    <Compile Include="ICasinoRepository.cs" />
+    <Compile Include="WstrzykiwanieStalych.cs" />
+    <Compile Include="IWistrzykiwanieDanych.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Participation.cs" />

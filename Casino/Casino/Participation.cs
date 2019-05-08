@@ -2,7 +2,7 @@
 
 namespace Casino
 {
-    class Participation //Zdarzenie
+    public class Participation //Zdarzenie
     {
         public Client Participator { get; set; }
         public PlayGame PlayedGame { get; set; }

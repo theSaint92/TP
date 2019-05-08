@@ -3,19 +3,20 @@ using System.Collections.ObjectModel; //ObservableCollection
 
 namespace Casino
 {
-    class CasinoContext //DataContext
+    public class CasinoContext //DataContext
     {
         public List<Client> ClientList;
         public Dictionary<int, Game> GameList;
         public ObservableCollection<PlayGame> PlayGameList;
         public ObservableCollection<Participation> ParticipationList;
 
-        public CasinoContext(List<Client> clientList, Dictionary<int, Game> gameList, ObservableCollection<PlayGame> playGameList, ObservableCollection<Participation> participationList)
+        public CasinoContext()
         {
-            this.ClientList = clientList;
-            this.GameList = gameList;
-            this.PlayGameList = playGameList;
-            this.ParticipationList = participationList;
+            ClientList = new List<Client>();
+            GameList = new Dictionary<int, Game>();
+            PlayGameList = new ObservableCollection<PlayGame>();
+            ParticipationList = new ObservableCollection<Participation>();
+        
         }
     }
 }

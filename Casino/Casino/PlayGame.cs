@@ -2,7 +2,7 @@
 
 namespace Casino
 {
-    class PlayGame //OpisStanu
+    public class PlayGame //OpisStanu
     {
         public int Id { set; get; }
         public Game Game { set; get; }
