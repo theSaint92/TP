@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\Casino\Casino.csproj">
       <Project>{e30103ae-13f1-42aa-b8c8-e4a1d472df22}</Project>
       <Name>Casino</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestData\TestData.csproj">
+      <Project>{3f90bb72-ebc2-45cb-9ab0-384f9181ad07}</Project>
+      <Name>TestData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
