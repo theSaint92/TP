@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CasinoRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CasinoServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

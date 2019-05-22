@@ -19,7 +19,7 @@ namespace Casino
 
         public override string ToString()
         {
-            return $"{Id}. {Name} {Surname}, {DateOfBirth.ToString("dd/MM/yyyy")}";
+            return $"[Id: {Id}] {Name} {Surname}, {DateOfBirth.ToString("dd/MM/yyyy")}";
         }
     }
 }

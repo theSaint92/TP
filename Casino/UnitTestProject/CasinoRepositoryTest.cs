@@ -138,7 +138,7 @@ namespace UnitTestProject
             Assert.AreEqual("Bodziuch", participations.ElementAt(3).Participator.Surname);
             Assert.AreEqual(new DateTime(2019, 04, 12, 20, 12, 15), participations.ElementAt(0).StartTime);
             Assert.AreEqual(new TimeSpan(2, 15, 28), participations.ElementAt(1).Duration);
-            Assert.AreEqual(320.00, participations.ElementAt(3).Profit);
+            Assert.AreEqual(-320.00, participations.ElementAt(3).Profit);
         }
 
         //updateTest

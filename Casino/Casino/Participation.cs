@@ -23,7 +23,7 @@ namespace Casino
 
         public override string ToString()
         {
-            return $"{Id}. [{PlayedGame.Game.GameName}] ParticipatorId: {Participator.Id}, Started: {StartTime.ToString("dd/MM/yyyy")}, Duration: {Duration.ToString()}, Profit: {Profit}";
+            return $"[Id: {Id}]. {PlayedGame.Game.GameName} (PlayGameId: {PlayedGame.Id}, ParticipatorId: {Participator.Id}) Started: {StartTime.ToString("dd/MM/yyyy")}, Duration: {Duration.ToString()}, Profit: {Profit}";
         }
     }
 }

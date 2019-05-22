@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Casino
 {
-    interface ICasinoService //IDataService
+    public interface ICasinoService //IDataService
     {
 
         /**
@@ -48,6 +48,16 @@ namespace Casino
         IEnumerable<PlayGame> SelectGamePlayGames(Game game);
 
         /**
+         * Selecting Games that client played.
+         */
+        IEnumerable<Game> SelectClientGames(Client client);
+
+        /**
+         * Selecting PlayGames that client participated in.
+         */
+        IEnumerable<PlayGame> SelectClientPlayGames(Client client);
+
+        /**
          * Returing most profitable game from Casino point of view.
          */
         Game SelectMostProfitableGame();
@@ -57,14 +67,5 @@ namespace Casino
          */
         Game SelectLeastProfitableGame();
 
-        /**
-         * Selecting Games that client played.
-         */
-        IEnumerable<Game> SelectClientGames(Client client);
-
-        /**
-         * Selecting PlayGames that client participated in.
-         */
-        IEnumerable<PlayGame> SelectClientPlayGames(Client client);
     }
 }

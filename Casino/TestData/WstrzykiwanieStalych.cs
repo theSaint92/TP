@@ -34,8 +34,8 @@ namespace Casino
                 context.ParticipationList.Add(new Participation(0, context.ClientList[0], context.PlayGameList[0], new DateTime(2019, 04, 12, 20, 12, 15), new TimeSpan(2, 15, 28), 120.00));
                 context.ParticipationList.Add(new Participation(1, context.ClientList[1], context.PlayGameList[0], new DateTime(2019, 04, 12, 20, 12, 15), new TimeSpan(2, 15, 28), 0.00));
                 context.ParticipationList.Add(new Participation(2, context.ClientList[2], context.PlayGameList[0], new DateTime(2019, 04, 12, 20, 20, 15), new TimeSpan(2, 00, 34), 70.00));
-                context.ParticipationList.Add(new Participation(3, context.ClientList[3], context.PlayGameList[1], new DateTime(2019, 05, 01, 19, 20, 30), new TimeSpan(3, 28, 10), 320.00));
-                context.ParticipationList.Add(new Participation(4, context.ClientList[4], context.PlayGameList[1], new DateTime(2019, 05, 01, 19, 20, 30), new TimeSpan(3, 28, 10), 80.00));
+                context.ParticipationList.Add(new Participation(3, context.ClientList[3], context.PlayGameList[1], new DateTime(2019, 05, 01, 19, 20, 30), new TimeSpan(3, 28, 10), -320.00));
+                context.ParticipationList.Add(new Participation(4, context.ClientList[4], context.PlayGameList[1], new DateTime(2019, 05, 01, 19, 20, 30), new TimeSpan(3, 28, 10), -80.00));
             }
     }
 }
