@@ -58,14 +58,14 @@ namespace Casino
         IEnumerable<PlayGame> SelectClientPlayGames(Client client);
 
         /**
-         * Returing most profitable game from Casino point of view.
+         * Returing most profitable game.
          */
-        Game SelectMostProfitableGame();
-        
+        Tuple<double,Game> SelectMostProfitableGame();
+
         /**
-         * Returing least profitable game from Casino point of view.
+         * Returing least profitable game.
          */
-        Game SelectLeastProfitableGame();
+        Tuple<double, Game> SelectLeastProfitableGame();
 
     }
 }

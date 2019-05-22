@@ -187,32 +187,9 @@ namespace Casino
         /**
          * Returing most profitable game from Casino point of view.
          */
-        public Game SelectMostProfitableGame()
+        public Tuple<double, Game> SelectMostProfitableGame()
         {
             Game mostProfitable = null;
-            double profit = Double.MinValue;
-            foreach (KeyValuePair<int, Game> g in Repository.GetAllGames())
-            {
-                double sum = 0;
-                foreach (Participation p in Repository.GetAllParticipations())
-                {
-                    if (p.PlayedGame.Game.Id == g.Value.Id) sum -= p.Profit;
-                }
-                if (sum > profit)
-                {
-                    profit = sum;
-                    mostProfitable = g.Value;
-                }
-            }
-            return mostProfitable;
-        }
-
-        /**
-         * Returing least profitable game from Casino point of view.
-         */
-        public Game SelectLeastProfitableGame()
-        {
-            Game leastProfitable = null;
             double profit = Double.MinValue;
             foreach (KeyValuePair<int, Game> g in Repository.GetAllGames())
             {
@@ -224,10 +201,33 @@ namespace Casino
                 if (sum > profit)
                 {
                     profit = sum;
+                    mostProfitable = g.Value;
+                }
+            }
+            return new Tuple<double,Game>( profit ,mostProfitable);
+        }
+
+        /**
+         * Returing least profitable game from Casino point of view.
+         */
+        public Tuple<double, Game> SelectLeastProfitableGame()
+        {
+            Game leastProfitable = null;
+            double profit = Double.MaxValue;
+            foreach (KeyValuePair<int, Game> g in Repository.GetAllGames())
+            {
+                double sum = 0;
+                foreach (Participation p in Repository.GetAllParticipations())
+                {
+                    if (p.PlayedGame.Game.Id == g.Value.Id) sum += p.Profit;
+                }
+                if (sum < profit)
+                {
+                    profit = sum;
                     leastProfitable = g.Value;
                 }
             }
-            return leastProfitable;
+            return new Tuple<double, Game>(profit, leastProfitable);
         }
     }
 }
