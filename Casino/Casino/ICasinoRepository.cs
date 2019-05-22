@@ -15,26 +15,26 @@ namespace Casino
         void AddParticipation(Participation participation);
 
         //read
-        Client GetClient(int id);
-        Game GetGame(int id);
-        PlayGame GetPlayGame(int id);
-        Participation GetParticipation(int id);
-        IEnumerable<Client> GetAllClient();
-        IEnumerable<KeyValuePair<int, Game>> GetAllGame();
-        IEnumerable<PlayGame> GetAllPlayGame();
+        Client GetClient(int clientId);
+        Game GetGame(int gameId);
+        PlayGame GetPlayGame(int playGameId);
+        Participation GetParticipation(int participationId);
+        IEnumerable<Client> GetAllClients();
+        IEnumerable<KeyValuePair<int, Game>> GetAllGames();
+        IEnumerable<PlayGame> GetAllPlayGames();
         IEnumerable<Participation> GetAllParticipations();
 
         //update
-        void UpdateClient(int id, Client client);
-        void UpdateGame(Game game);
-        void UpdatePlayGame(int id, PlayGame playGame);
-        void UpdateParticipation(int id, Participation participation);
+        bool UpdateClient(Client client);
+        bool UpdateGame(Game game);
+        bool UpdatePlayGame(PlayGame playGame);
+        bool UpdateParticipation(Participation participation);
 
         //delete
-        void DeleteClient(int id);
-        void DeleteGame(int id);
-        void DeletePlayGame(int id);
-        void DeleteParticipation(int id);
+        bool DeleteClient(int clientId);
+        bool DeleteGame(int gameId);
+        bool DeletePlayGame(int playGameId);
+        bool DeleteParticipation(int participationId);
 
 
     }

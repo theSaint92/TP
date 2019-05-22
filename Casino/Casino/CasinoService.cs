@@ -8,39 +8,58 @@ namespace Casino
 {
     class CasinoService : ICasinoService
     {
-        private ICasinoRepository repository;
+        private ICasinoRepository Repository;
+        private int CurrentMaxClientId = 0;
+        private int CurrentMaxGameId = 0;
+        private int CurrentMaxPlayGameId = 0;
+        private int CurrentMaxParticipationId = 0;
 
         /**
          * Constructors
          */
         public CasinoService(ICasinoRepository r)
         {
-            repository = r;
+            Repository = r;
+            
+            // To efficiently add elements to repository without iterating
+            // through it every time.
+            foreach (Client c in r.GetAllClients())
+                if (c.Id > CurrentMaxClientId) CurrentMaxClientId = c.Id;
+            foreach (KeyValuePair<int, Game> g in r.GetAllGames())
+                if (g.Key > CurrentMaxGameId) CurrentMaxGameId = g.Key;
+            foreach (PlayGame p in r.GetAllPlayGames())
+                if (p.Id > CurrentMaxPlayGameId) CurrentMaxPlayGameId = p.Id;
+            foreach (Participation p in r.GetAllParticipations())
+                if (p.Id > CurrentMaxParticipationId) CurrentMaxParticipationId = p.Id;
         }
 
         public int AddClient(string name, string surname, DateTime dateOfBirth)
         {
-            throw new NotImplementedException();
+            Repository.AddClient(new Client(++CurrentMaxClientId, name, surname, dateOfBirth));
+            return CurrentMaxClientId;
         }
 
         public int AddGame(string gameName, string gameDescription)
         {
-            throw new NotImplementedException();
+            Repository.AddGame(new Game(++CurrentMaxGameId, gameName, gameDescription));
+            return CurrentMaxGameId;
         }
 
-        public void AddParticipation(int clientId, int playGameId, DateTime startTime, TimeSpan duration, double profit)
+        public int AddParticipation(Client participator, PlayGame playedGame, DateTime startTime, TimeSpan duration, double profit)
         {
-            throw new NotImplementedException();
+            Repository.AddParticipation(new Participation(++CurrentMaxParticipationId, participator, playedGame, startTime, duration, profit));
+            return CurrentMaxParticipationId;
         }
 
-        public int AddPlayGame(int gameId, DateTime startTime, TimeSpan duration, double minimumDeposit, double entryFee)
+        public int AddPlayGame(Game game, DateTime startTime, TimeSpan duration, double minimumDeposit, double entryFee)
         {
-            throw new NotImplementedException();
+            Repository.AddPlayGame(new PlayGame(++CurrentMaxPlayGameId, game, startTime, duration, minimumDeposit, entryFee));
+            return CurrentMaxPlayGameId;
         }
 
-        public void ChangeClientData(int client, string newName, string newSurname, DateTime dateOfBirth)
+        public void ChangeClientData(int clientId, string newName, string newSurname, DateTime dateOfBirth)
         {
-            throw new NotImplementedException();
+            Repository.UpdateClient(new Client(clientId, newName, newSurname, dateOfBirth));
         }
 
         public string ClientsToString()
@@ -68,22 +87,22 @@ namespace Casino
             throw new NotImplementedException();
         }
 
-        public List<Game> SelectClientGames(int client)
+        public IEnumerable<Game> SelectClientGames(Client client)
         {
             throw new NotImplementedException();
         }
 
-        public List<Participation> SelectClientParticipations(int client)
+        public IEnumerable<Participation> SelectClientParticipations(Client client)
         {
             throw new NotImplementedException();
         }
 
-        public List<PlayGame> SelectClientPlayGames(int client)
+        public IEnumerable<PlayGame> SelectClientPlayGames(Client client)
         {
             throw new NotImplementedException();
         }
 
-        public List<PlayGame> SelectGamePlayGames(int gameId)
+        public IEnumerable<PlayGame> SelectGamePlayGames(Game game)
         {
             throw new NotImplementedException();
         }

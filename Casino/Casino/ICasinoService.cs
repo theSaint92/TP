@@ -29,8 +29,8 @@ namespace Casino
          */ 
         int AddClient( string name , string surname , DateTime dateOfBirth );
         int AddGame( string gameName , string gameDescription );
-        int AddPlayGame( int gameId, DateTime startTime, TimeSpan duration, double minimumDeposit, double entryFee);
-        void AddParticipation(int clientId, int playGameId, DateTime startTime, TimeSpan duration, double profit);
+        int AddPlayGame( Game game, DateTime startTime, TimeSpan duration, double minimumDeposit, double entryFee);
+        int AddParticipation(Client participator, PlayGame playedGame, DateTime startTime, TimeSpan duration, double profit);
 
         /**
          * Changeing client data in case we need. Maybe he changed name, surname or gender... dunno bro
@@ -40,12 +40,12 @@ namespace Casino
         /**
          * Returning list of participations of specified player
          */ 
-        List<Participation> SelectClientParticipations(int client);
+        IEnumerable<Participation> SelectClientParticipations(Client client);
 
         /**
          * Returning list of PlayGames for selected game.
-         */ 
-        List<PlayGame> SelectGamePlayGames(int gameId);
+         */
+        IEnumerable<PlayGame> SelectGamePlayGames(Game game);
 
         /**
          * Returing most profitable game from Casino point of view.
@@ -56,15 +56,15 @@ namespace Casino
          * Returing least profitable game from Casino point of view.
          */
         Game SelectLeastProfitableGame();
-        
+
         /**
          * Selecting Games that client played.
          */
-        List<Game> SelectClientGames(int client);
-        
+        IEnumerable<Game> SelectClientGames(Client client);
+
         /**
          * Selecting PlayGames that client participated in.
          */
-        List<PlayGame> SelectClientPlayGames(int client);
+        IEnumerable<PlayGame> SelectClientPlayGames(Client client);
     }
 }

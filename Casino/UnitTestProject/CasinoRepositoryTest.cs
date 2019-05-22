@@ -21,7 +21,7 @@ namespace UnitTestProject
         {
             Client client = new Client(12, "Maciej", "Moś", new DateTime(1995, 09, 06));
             testRepository.AddClient(client);
-            Client tester = testRepository.GetClient(5);
+            Client tester = testRepository.GetClient(12);
             Assert.AreEqual(client, tester);
 
         }
@@ -38,7 +38,7 @@ namespace UnitTestProject
         [TestMethod]
         public void AddParticipationTest()
         {
-            Participation participation = new Participation(testRepository.GetClient(1), testRepository.GetPlayGame(1), new DateTime(2019, 05, 02, 12, 15, 16), new TimeSpan(2, 15, 18), 400.00);
+            Participation participation = new Participation(5,testRepository.GetClient(1), testRepository.GetPlayGame(1), new DateTime(2019, 05, 02, 12, 15, 16), new TimeSpan(2, 15, 18), 400.00);
             testRepository.AddParticipation(participation);
             Participation tester = testRepository.GetParticipation(5);
             Assert.AreEqual(participation, tester);
@@ -49,7 +49,7 @@ namespace UnitTestProject
         {
             PlayGame playGame = new PlayGame(10, testRepository.GetGame(0), new DateTime(2019, 05, 02, 12, 16, 19), new TimeSpan(2, 15, 04), 50.00, 5.00);
             testRepository.AddPlayGame(playGame);
-            PlayGame tester = testRepository.GetPlayGame(7);
+            PlayGame tester = testRepository.GetPlayGame(10);
             Assert.AreEqual(playGame, tester);
         }
 
@@ -98,9 +98,9 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void ReadAllClientTest()
+        public void ReadAllClientsTest()
         {
-            IEnumerable<Client> clients = testRepository.GetAllClient();
+            IEnumerable<Client> clients = testRepository.GetAllClients();
             Assert.AreEqual(5, clients.Count());
             Assert.AreEqual("Aldona", clients.ElementAt(1).Name);
             Assert.AreEqual("Milczarek", clients.ElementAt(1).Surname);
@@ -109,9 +109,9 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void ReadAllGameTest()
+        public void ReadAllGamesTest()
         {
-            IEnumerable<KeyValuePair<int, Game>> games = testRepository.GetAllGame();
+            IEnumerable<KeyValuePair<int, Game>> games = testRepository.GetAllGames();
             Assert.AreEqual(3, games.Count());
             Assert.AreEqual(0, games.ElementAt(0).Value.Id);
             Assert.AreEqual("Poker", games.ElementAt(0).Value.GameName);
@@ -120,9 +120,9 @@ namespace UnitTestProject
 
 
         [TestMethod]
-        public void ReadAllPlayGameTest()
+        public void ReadAllPlayGamesTest()
         {
-            IEnumerable<PlayGame> playGames = testRepository.GetAllPlayGame();
+            IEnumerable<PlayGame> playGames = testRepository.GetAllPlayGames();
             Assert.AreEqual(7, playGames.Count());
             Assert.AreEqual(1, playGames.ElementAt(1).Id);
             Assert.AreEqual(new DateTime(2019, 05, 01, 19, 20, 30), playGames.ElementAt(1).StartTime);
@@ -130,7 +130,7 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void ReadAllParticipationTest()
+        public void ReadAllParticipationsTest()
         {
             IEnumerable<Participation> participations = testRepository.GetAllParticipations();
             Assert.AreEqual(5, participations.Count());
@@ -146,19 +146,29 @@ namespace UnitTestProject
         [TestMethod]
         public void UpdateClientTest()
         {
-            Client client = new Client(5,"Anna","Maciąg",new DateTime(1992,05,07));
-            testRepository.UpdateClient(3, client);
-            Client tester = testRepository.GetClient(3);
+            Client client = new Client(4,"Anna","Maciąg",new DateTime(1992,05,07));
+            bool result = testRepository.UpdateClient(client);
+            Client tester = testRepository.GetClient(4);
             Assert.AreEqual(client, tester);
+            Assert.AreEqual(true, result);
+
+            Client client2 = new Client(5, "Anna", "Maciąg", new DateTime(1992, 05, 07));
+            bool result2 = testRepository.UpdateClient(client2);
+            Assert.AreEqual(false, result2);
         }
 
         [TestMethod]
         public void UpdateGameTest()
         {
-            Game game = new Game(3,"Automaty","...");
-            testRepository.UpdateGame(game);
-            Game tester = testRepository.GetGame(3);
+            Game game = new Game(2, "Automaty", "...");
+            bool result = testRepository.UpdateGame(game);
+            Game tester = testRepository.GetGame(2);
             Assert.AreEqual(game, tester);
+            Assert.AreEqual(true, result);
+
+            Game game2 = new Game(3,"Automaty2","...");
+            bool result2 = testRepository.UpdateGame(game2);
+            Assert.AreEqual(false, result2);
 
         }
 
@@ -167,9 +177,14 @@ namespace UnitTestProject
         {
 
             PlayGame playGame = new PlayGame(3,testRepository.GetGame(1), new DateTime(2019, 04, 15, 18, 30, 17), new TimeSpan(3, 40, 14), 70.00, 10.00);
-            testRepository.UpdatePlayGame(1,playGame);
-            PlayGame tester = testRepository.GetPlayGame(1);
+            bool result = testRepository.UpdatePlayGame(playGame);
+            PlayGame tester = testRepository.GetPlayGame(3);
             Assert.AreEqual(playGame, tester);
+            Assert.AreEqual(true, result);
+
+            PlayGame playGame2 = new PlayGame(15, testRepository.GetGame(1), new DateTime(2019, 04, 15, 18, 30, 17), new TimeSpan(3, 40, 14), 70.00, 10.00);
+            bool result2 = testRepository.UpdatePlayGame(playGame2);
+            Assert.AreEqual(false, result2);
 
         }
 
@@ -177,10 +192,15 @@ namespace UnitTestProject
         public void UpdateParticipationTest()
         {
 
-            Participation participation = new Participation(testRepository.GetClient(0), testRepository.GetPlayGame(0), new DateTime(2019, 04, 12, 20, 12, 15), new TimeSpan(2, 15, 28), 120.00);
-            testRepository.UpdateParticipation(2, participation);
-            Participation tester = testRepository.GetParticipation(2);
+            Participation participation = new Participation(3,testRepository.GetClient(0), testRepository.GetPlayGame(0), new DateTime(2019, 04, 12, 20, 12, 15), new TimeSpan(2, 15, 28), 120.00);
+            bool result = testRepository.UpdateParticipation(participation);
+            Participation tester = testRepository.GetParticipation(3);
             Assert.AreEqual(tester, participation);
+            Assert.AreEqual(true, result);
+
+            Participation participation2 = new Participation(15, testRepository.GetClient(0), testRepository.GetPlayGame(0), new DateTime(2019, 04, 12, 20, 12, 15), new TimeSpan(2, 15, 28), 120.00);
+            bool result2 = testRepository.UpdateParticipation(participation2);
+            Assert.AreEqual(false, result2);
 
         }
 
@@ -189,42 +209,58 @@ namespace UnitTestProject
         [TestMethod]
         public void DeleteClientTest()
         {
-            Assert.AreEqual(5, testRepository.GetAllClient().Count());
-            Client tester = testRepository.GetClient(2);
-            testRepository.DeleteClient(1);
-            Assert.AreEqual(4, testRepository.GetAllClient().Count());
-            Assert.AreEqual(tester, testRepository.GetClient(1));
+            Assert.AreEqual(5, testRepository.GetAllClients().Count());
+            bool result = testRepository.DeleteClient(1);
+            Assert.AreEqual(4, testRepository.GetAllClients().Count());
+            Assert.AreEqual(true, result);
+
+            bool result2 = testRepository.DeleteClient(15);
+            Assert.AreEqual(4, testRepository.GetAllClients().Count());
+            Assert.AreEqual(false, result2);
         }
 
 
         [TestMethod]
         public void DeleteGameTest()
         {
-            IEnumerable<KeyValuePair<int, Game>> games = testRepository.GetAllGame();
+            IEnumerable<KeyValuePair<int, Game>> games = testRepository.GetAllGames();
             Assert.AreEqual(3, games.Count());
-            testRepository.DeleteGame(2);
-            games = testRepository.GetAllGame();
+            bool result = testRepository.DeleteGame(2);
+            games = testRepository.GetAllGames();
             Assert.AreEqual(2, games.Count());
+            Assert.AreEqual(true, result);
+
+            bool result2 = testRepository.DeleteGame(15);
+            games = testRepository.GetAllGames();
+            Assert.AreEqual(2, games.Count());
+            Assert.AreEqual(false, result2);
+
         }
 
         [TestMethod]
         public void DeletePlayGameTest()
         {
-            Assert.AreEqual(7, testRepository.GetAllPlayGame().Count());
-            PlayGame playGame = testRepository.GetPlayGame(2);
-            testRepository.DeletePlayGame(1);
-            Assert.AreEqual(6, testRepository.GetAllPlayGame().Count());
-            Assert.AreEqual(playGame, testRepository.GetPlayGame(1));
+            Assert.AreEqual(7, testRepository.GetAllPlayGames().Count());
+            bool result = testRepository.DeletePlayGame(1);
+            Assert.AreEqual(6, testRepository.GetAllPlayGames().Count());
+            Assert.AreEqual(true,result);
+
+            bool result2 = testRepository.DeletePlayGame(15);
+            Assert.AreEqual(6, testRepository.GetAllPlayGames().Count());
+            Assert.AreEqual(false, result2);
         }
 
         [TestMethod]
         public void DeleteParticipationTest()
         {
             Assert.AreEqual(5, testRepository.GetAllParticipations().Count());
-            Participation participation = testRepository.GetParticipation(2);
-            testRepository.DeleteParticipation(1);
+            bool result = testRepository.DeleteParticipation(1);
             Assert.AreEqual(4, testRepository.GetAllParticipations().Count());
-            Assert.AreEqual(participation, testRepository.GetParticipation(1));
+            Assert.AreEqual(true, result);
+
+            bool result2 = testRepository.DeleteParticipation(15);
+            Assert.AreEqual(4, testRepository.GetAllParticipations().Count());
+            Assert.AreEqual(false, result2);
         }
 
 

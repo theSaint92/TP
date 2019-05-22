@@ -35,34 +35,63 @@ namespace Casino
 
 
         //delete
-        public void DeleteClient(int id)
+        public bool DeleteClient(int clientId)
         {
-            Context.ClientList.RemoveAt(id);
+            foreach (Client c in Context.ClientList)
+            {
+                if (c.Id == clientId)
+                {
+                    Context.ClientList.Remove(c);
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public void DeleteGame(int id)
+        public bool DeleteGame(int gameId)
         {
-            Context.GameList.Remove(id);
+            if (Context.GameList.ContainsKey(gameId))
+            {
+                Context.GameList.Remove(gameId);
+                return true;
+            }
+            return false;       
         }
 
-        public void DeleteParticipation(int id)
+        public bool DeleteParticipation(int participationId)
         {
-            Context.ParticipationList.RemoveAt(id);
+            foreach (Participation p in Context.ParticipationList)
+            {
+                if (p.Id == participationId)
+                {
+                    Context.ParticipationList.Remove(p);
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public void DeletePlayGame(int id)
+        public bool DeletePlayGame(int playGameId)
         {
-            Context.PlayGameList.RemoveAt(id);
+            foreach (PlayGame p in Context.PlayGameList)
+            {
+                if (p.Id == playGameId)
+                {
+                    Context.PlayGameList.Remove(p);
+                    return true;
+                }
+            }
+            return false;
         }
 
 
         //read
-        public IEnumerable<Client> GetAllClient()
+        public IEnumerable<Client> GetAllClients()
         {
             return Context.ClientList;
         }
 
-        public IEnumerable<KeyValuePair<int, Game>> GetAllGame()
+        public IEnumerable<KeyValuePair<int, Game>> GetAllGames()
         {
             return Context.GameList;
         }
@@ -72,51 +101,98 @@ namespace Casino
             return Context.ParticipationList;
         }
 
-        public IEnumerable<PlayGame> GetAllPlayGame()
+        public IEnumerable<PlayGame> GetAllPlayGames()
         {
             return Context.PlayGameList;
         }
 
-        public Client GetClient(int id)
+        public Client GetClient(int clientId)
         {
-            return Context.ClientList[id];
+            foreach (Client c in Context.ClientList)
+            {
+                if (c.Id == clientId)
+                    return c;
+            }
+            return null;
         }
 
-        public Game GetGame(int id)
+        public Game GetGame(int gameId)
         {
-            return Context.GameList[id];
+            return Context.GameList[gameId];
         }
 
-        public Participation GetParticipation(int id)
+        public Participation GetParticipation(int participationId)
         {
-            return Context.ParticipationList[id];
+            foreach (Participation p in Context.ParticipationList)
+            {
+                if (p.Id == participationId)
+                    return p;
+            }
+            return null;
         }
 
-        public PlayGame GetPlayGame(int id)
+        public PlayGame GetPlayGame(int playGameId)
         {
-            return Context.PlayGameList[id];
+            foreach (PlayGame p in Context.PlayGameList)
+            {
+                if (p.Id == playGameId)
+                    return p;
+            }
+            return null;
         }
 
 
         //update
-        public void UpdateClient(int id, Client client)
+        public bool UpdateClient(Client client)
         {
-            Context.ClientList[id] = client;
+            foreach (Client c in Context.ClientList)
+            {
+                if (c.Id == client.Id)
+                {
+                    Context.ClientList.Remove(c);
+                    Context.ClientList.Add(client);
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public void UpdateGame(Game game)
+        public bool UpdateGame(Game game)
         {
-            Context.GameList[game.Id] = game;
+            if (Context.GameList.ContainsKey(game.Id))
+            {
+                Context.GameList[game.Id] = game;
+                return true;
+            }
+            return false;
         }
 
-        public void UpdateParticipation(int id, Participation participation)
+        public bool UpdateParticipation(Participation participation)
         {
-            Context.ParticipationList[id] = participation;
+            foreach (Participation p in Context.ParticipationList)
+            {
+                if (p.Id == participation.Id)
+                {
+                    Context.ParticipationList.Remove(p);
+                    Context.ParticipationList.Add(participation);
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public void UpdatePlayGame(int id, PlayGame playGame)
+        public bool UpdatePlayGame(PlayGame playGame)
         {
-            Context.PlayGameList[id] = playGame;
+            foreach (PlayGame p in Context.PlayGameList)
+            {
+                if (p.Id == playGame.Id)
+                {
+                    Context.PlayGameList.Remove(p);
+                    Context.PlayGameList.Add(playGame);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -23,8 +23,7 @@ namespace Casino
 
         public override string ToString()
         {
-            //TODO write proper toString() text
-            return $"Later will do";
+            return $"{Id}. [{Game.GameName}] Started: {StartTime.ToString("dd/MM/yyyy")}, Duration: {Duration.ToString()}, Minimum Deposit: {MinimumDeposit}, Entry fee: {EntryFee}";
         }
     }
 }
