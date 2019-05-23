@@ -33,9 +33,6 @@ namespace UnitTestProject
             Assert.AreEqual(50, repository.GetAllPlayGames().Count());
             Assert.AreEqual(50, repository.GetAllParticipations().Count());
 
-
-            service.RepositoryToString();
-
         }
 
 
@@ -50,9 +47,6 @@ namespace UnitTestProject
             Assert.AreEqual(500, repository.GetAllPlayGames().Count());
             Assert.AreEqual(500, repository.GetAllParticipations().Count());
 
-
-            service.RepositoryToString();
-
         }
 
         [TestMethod]
@@ -65,9 +59,6 @@ namespace UnitTestProject
             Assert.AreEqual(5000, repository.GetAllGames().Count());
             Assert.AreEqual(5000, repository.GetAllPlayGames().Count());
             Assert.AreEqual(5000, repository.GetAllParticipations().Count());
-
-
-            service.RepositoryToString();
 
         }
 
@@ -82,8 +73,6 @@ namespace UnitTestProject
             Assert.AreEqual(50000, repository.GetAllPlayGames().Count());
             Assert.AreEqual(50000, repository.GetAllParticipations().Count());
 
-
-            service.RepositoryToString();
 
         }
 
