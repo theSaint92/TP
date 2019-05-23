@@ -12,12 +12,14 @@ namespace Casino
         private int numberOfClients;
         private int numberOfGames;
         private int numberOfPlayGames;
+        private int numbersOfParticipations;
 
-        public WstrzykiwanieIlosciowe(int clients, int games, int playGames)
+        public WstrzykiwanieIlosciowe(int clients, int games, int playGames, int participations)
         {
             numberOfClients = clients;
             numberOfGames = games;
             numberOfPlayGames = playGames;
+            numbersOfParticipations = participations;
 
         }
 
@@ -51,16 +53,19 @@ namespace Casino
             //add playGames
             for (int i = 0; i < numberOfPlayGames; i++)
             {
-                for (int j = 0; j < numberOfPlayGames; j++)
-                {
-                    PlayGame playGame = new PlayGame(i, context.GameList[i], new DateTime((2000 + i / 365), i % 12 + 1, i % 28 + 1), new TimeSpan(i + 20), i + 50, i + 20);
-                    context.PlayGameList.Add(playGame);
-                }
-            }
+                int Id = i;
+                Game game = context.GameList[i];
+                DateTime startTime = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1);
+                TimeSpan duration = new TimeSpan(i % 24, i % 60, i % 59 + 1);
+                double minimumDeposit = i + 10;
+                double entryFee = i + 100;
+
+                context.PlayGameList.Add(new PlayGame(Id, game, startTime, duration, minimumDeposit, entryFee));
+             }
 
 
             //add Participation
-            for (int i = 0; i < context.PlayGameList.Count / 2; i++)
+            for (int i = 0; i < numbersOfParticipations; i++)
             {
                 Client client = context.ClientList[i % context.ClientList.Count];
                 PlayGame playGame = context.PlayGameList[i];

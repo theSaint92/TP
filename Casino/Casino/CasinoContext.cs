@@ -26,13 +26,13 @@ namespace Casino
 
         /**
          * Subscriber to PlayGameList OnCollectionChanged
-         */ 
+         */
         public void OnPlayGameCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
-                foreach(PlayGame p in e.NewItems)
+                foreach (PlayGame p in e.NewItems)
                     Console.WriteLine("Added PlayGame element with id " + p.Id + " into DataContext.");
-                
+
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (PlayGame p in e.OldItems)
                     Console.WriteLine("Removed PlayGame element with id " + p.Id + " from DataContext.");
