@@ -8,7 +8,8 @@ namespace WarstwaUslug
 {
     public class CasinoRepository
     {
-        private static DataBaseDataContext DataBaseContext = new DataBaseDataContext();
+        private static DataBaseDataContext DataBaseContext;
+
 
         public static DataBaseDataContext Context
         {
@@ -86,7 +87,7 @@ namespace WarstwaUslug
                               where clients.Id == clientId
                               select clients).First();
 
-            if(client != null)
+            if (client != null)
             {
                 DataBaseContext.Clients.DeleteOnSubmit(client);
             }
@@ -105,8 +106,8 @@ namespace WarstwaUslug
         public static void DeleteGame(int gameId)
         {
             Games game = (from games in DataBaseContext.Games
-                              where games.Id == gameId
-                              select games).First();
+                          where games.Id == gameId
+                          select games).First();
 
             if (game != null)
             {
@@ -203,8 +204,8 @@ namespace WarstwaUslug
         public static Clients GetClient(int clientId)
         {
             Clients client = (from clients in DataBaseContext.Clients
-                             where clients.Id == clientId
-                             select clients).First();
+                              where clients.Id == clientId
+                              select clients).First();
 
             return client;
         }
@@ -316,6 +317,130 @@ namespace WarstwaUslug
             }
 
         }
+
+        //czyszczenie bazy
+
+        public static void DeleteAllClient(int numberOfClients)
+        {
+            for(int i=0; i < numberOfClients; i++)
+            {
+                CasinoRepository.DeleteClient(i);
+            }
+        }
+
+        public static void DeleteAllGames(int numberOfGames)
+        {
+            for (int i = 0; i < numberOfGames; i++)
+            {
+                CasinoRepository.DeleteGame(i);
+            }
+        }
+
+        public static void DeleteAllPlayGames(int numberOfPlayGames)
+        {
+            for (int i = 0; i < numberOfPlayGames; i++)
+            {
+                CasinoRepository.DeletePlayGame(i);
+            }
+        }
+
+
+        public static void DeleteAllParticipations(int numberOfParticipations)
+        {
+            for (int i = 0; i < numberOfParticipations; i++)
+            {
+                CasinoRepository.DeleteParticipation(i);
+            }
+        }
+
+
+
+        //WstrzykiwanieDanych
+
+        public static void WstrzykiwanieDanych(int numberOfClient, int numberOfGames, int numberOfPlayedGames, int numberOfParticipation)
+        {
+
+            //wstrzykiwanie klientów
+
+            int number1 = CasinoRepository.GetAllClients().Count();
+
+            for(int i = number1 ; i < number1 + numberOfClient - 1 ; i++)
+            {
+                Clients client = new Clients()
+                {
+                    Id = i,
+                    Name = string.Concat("Imie", i),
+                    Surname = string.Concat("Nazwisko", i),
+                    DataOfBirth = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
+                };
+
+                CasinoRepository.AddClient(client);
+            }
+
+
+            //wstrzykiwanie gier
+
+            int number2 = CasinoRepository.GetAllGames().Count();
+
+            for (int i = number2; i < number2 + numberOfGames - 1; i++)
+            {
+                Games game = new Games()
+                {
+                    Id = i,
+                    GameName = string.Concat("Gra", i),
+                    GameDescription = string.Concat("Opis", i),
+                };
+
+                CasinoRepository.AddGame(game);
+            }
+
+           
+            
+            //wstrzykiwanie rozegranychGier
+
+            int number3 = CasinoRepository.GetAllPlayGames().Count();
+
+            for (int i = number3; i < number3 + numberOfPlayedGames - 1; i++)
+            {
+                PlayGames playGame = new PlayGames()
+                {
+                    Id = i,
+                    Game = i,
+                    StartTime = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
+                    Duration = new TimeSpan(i % 24, i % 60, i % 59 + 1),
+                    MinimumDeposit = i + 10,
+                    EntryFee = i + 20,
+                };
+
+                CasinoRepository.AddPlayedGame(playGame);
+            }
+
+            
+            //wstrzykiwanie zdarzeń
+
+            int number4 = CasinoRepository.GetAllParticipations().Count();
+
+            for (int i = number4; i < number4 + numberOfPlayedGames - 1 ; i++)
+            {
+
+                Participations participation = new Participations()
+                {
+                    Id = i,
+                    Client = i,
+                    PlayedGames = i,
+                    StartTime = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
+                    Duration = new TimeSpan(i % 24, i % 60, i % 59 + 1),
+                    Profit = i + 120,
+                };
+
+                CasinoRepository.AddParticipation(participation);
+            }
+
+
+
+
+        }
+
     }
 }
 
