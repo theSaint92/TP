@@ -80,6 +80,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CasinoRepository.cs" />
+    <Compile Include="DataBase.cs">
+      <DependentUpon>DataBase.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataBase.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
