@@ -9,19 +9,17 @@ namespace UnitTest
     [TestClass]
     public class CasinoRepositoryTest
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            CasinoRepository.Context = new DataBaseDataContext();
 
-        }
-
+        ICasinoRepository testRepository = new CasinoRepository();
+        CasinoRepository.Context 
         
+     
+      
         //AddTest
         [TestMethod]
         public void AddClientTest()
         {
-            int count = CasinoRepository.GetAllClients().Count();
+            int count = testReposiotry.GetAllClients().Count();
 
             Clients client = new Clients()
             {

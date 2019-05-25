@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace WarstwaUslug
 {
-    public class CasinoRepository
+    public class CasinoRepository : ICasinoRepository
     {
-        private static DataBaseDataContext DataBaseContext;
+        private DataBaseDataContext DataBaseContext;
+
+        public CasinoRepository()
+        {
+            DataBaseContext = new DataBaseDataContext();
+        }
 
 
-        public static DataBaseDataContext Context
+        public  DataBaseDataContext Context
         {
             get => DataBaseContext;
             set => DataBaseContext = value;
@@ -19,7 +24,7 @@ namespace WarstwaUslug
         }
 
         //create
-        public static void AddClient(Clients client)
+        public void AddClient(Clients client)
         {
             DataBaseContext.Clients.InsertOnSubmit(client);
 
@@ -35,7 +40,7 @@ namespace WarstwaUslug
 
         }
 
-        public static void AddGame(Games game)
+        public void AddGame(Games game)
         {
             DataBaseContext.Games.InsertOnSubmit(game);
 
@@ -51,7 +56,7 @@ namespace WarstwaUslug
         }
 
 
-        public static void AddPlayedGame(PlayGames playGame)
+        public void AddPlayedGame(PlayGames playGame)
         {
             DataBaseContext.PlayGames.InsertOnSubmit(playGame);
 
@@ -66,7 +71,7 @@ namespace WarstwaUslug
         }
 
 
-        public static void AddParticipation(Participations participation)
+        public void AddParticipation(Participations participation)
         {
             DataBaseContext.Participations.InsertOnSubmit(participation);
 
@@ -81,7 +86,7 @@ namespace WarstwaUslug
         }
 
         //delete
-        public static void DeleteClient(int clientId)
+        public void DeleteClient(int clientId)
         {
             Clients client = (from clients in DataBaseContext.Clients
                               where clients.Id == clientId
@@ -103,7 +108,7 @@ namespace WarstwaUslug
 
         }
 
-        public static void DeleteGame(int gameId)
+        public void DeleteGame(int gameId)
         {
             Games game = (from games in DataBaseContext.Games
                           where games.Id == gameId
@@ -123,7 +128,7 @@ namespace WarstwaUslug
 
             }
         }
-        public static void DeleteParticipation(int participationId)
+        public void DeleteParticipation(int participationId)
         {
             Participations participation = (from participations in DataBaseContext.Participations
                                             where participations.Id == participationId
@@ -144,7 +149,7 @@ namespace WarstwaUslug
             }
         }
 
-        public static void DeletePlayGame(int playGameId)
+        public void DeletePlayGame(int playGameId)
         {
             PlayGames playGame = (from playGames in DataBaseContext.PlayGames
                                   where playGames.Id == playGameId
@@ -167,7 +172,7 @@ namespace WarstwaUslug
 
 
         //read
-        public static IEnumerable<Clients> GetAllClients()
+        public IEnumerable<Clients> GetAllClients()
         {
             List<Clients> allClients = (from clients in DataBaseContext.Clients
                                         select clients).ToList();
@@ -175,7 +180,7 @@ namespace WarstwaUslug
             return allClients;
         }
 
-        public static IEnumerable<Games> GetAllGames()
+        public IEnumerable<Games> GetAllGames()
         {
             List<Games> allGames = (from games in DataBaseContext.Games
                                     select games).ToList();
@@ -183,7 +188,7 @@ namespace WarstwaUslug
             return allGames;
         }
 
-        public static IEnumerable<Participations> GetAllParticipations()
+        public IEnumerable<Participations> GetAllParticipations()
         {
             List<Participations> allPatricipations = (from patricipations in DataBaseContext.Participations
                                                       select patricipations).ToList();
@@ -192,7 +197,7 @@ namespace WarstwaUslug
         }
 
 
-        public static IEnumerable<PlayGames> GetAllPlayGames()
+        public IEnumerable<PlayGames> GetAllPlayGames()
         {
             List<PlayGames> allPlayGames = (from playGames in DataBaseContext.PlayGames
                                             select playGames).ToList();
@@ -201,7 +206,7 @@ namespace WarstwaUslug
         }
 
 
-        public static Clients GetClient(int clientId)
+        public Clients GetClient(int clientId)
         {
             Clients client = (from clients in DataBaseContext.Clients
                               where clients.Id == clientId
@@ -210,7 +215,7 @@ namespace WarstwaUslug
             return client;
         }
 
-        public static Games GetGame(int gameId)
+        public Games GetGame(int gameId)
         {
             Games game = (from games in DataBaseContext.Games
                           where games.Id == gameId
@@ -219,7 +224,7 @@ namespace WarstwaUslug
             return game;
         }
 
-        public static Participations GetPatricipation(int participationId)
+        public Participations GetPatricipation(int participationId)
         {
             Participations participation = (from participations in DataBaseContext.Participations
                                             where participations.Id == participationId
@@ -228,7 +233,7 @@ namespace WarstwaUslug
             return participation;
         }
 
-        public static PlayGames GetPlayGame(int playGameId)
+        public PlayGames GetPlayGame(int playGameId)
         {
             PlayGames playGame = (from playGames in DataBaseContext.PlayGames
                                   where playGames.Id == playGameId
@@ -239,7 +244,7 @@ namespace WarstwaUslug
 
 
         //update
-        public static void UpdateClient(Clients client)
+        public void UpdateClient(Clients client)
         {
             Clients updateClient = DataBaseContext.Clients.Single(p => p.Id == client.Id);
 
@@ -258,7 +263,7 @@ namespace WarstwaUslug
 
         }
 
-        public static void UpdateGame(Games game)
+        public void UpdateGame(Games game)
         {
             Games updateGame = DataBaseContext.Games.Single(p => p.Id == game.Id);
 
@@ -276,7 +281,7 @@ namespace WarstwaUslug
 
         }
 
-        public static void UpdatePlayGame(PlayGames playGame)
+        public void UpdatePlayGame(PlayGames playGame)
         {
             PlayGames updatePlayGame = DataBaseContext.PlayGames.Single(p => p.Id == playGame.Id);
 
@@ -297,7 +302,7 @@ namespace WarstwaUslug
 
         }
 
-        public static void UpdateParticipation(Participations participation)
+        public void UpdateParticipation(Participations participation)
         {
             Participations updateParticipation = DataBaseContext.Participations.Single(p => p.Id == participation.Id);
 
@@ -318,128 +323,7 @@ namespace WarstwaUslug
 
         }
 
-        //czyszczenie bazy
-
-        public static void DeleteAllClient(int numberOfClients)
-        {
-            for(int i=0; i < numberOfClients; i++)
-            {
-                CasinoRepository.DeleteClient(i);
-            }
-        }
-
-        public static void DeleteAllGames(int numberOfGames)
-        {
-            for (int i = 0; i < numberOfGames; i++)
-            {
-                CasinoRepository.DeleteGame(i);
-            }
-        }
-
-        public static void DeleteAllPlayGames(int numberOfPlayGames)
-        {
-            for (int i = 0; i < numberOfPlayGames; i++)
-            {
-                CasinoRepository.DeletePlayGame(i);
-            }
-        }
-
-
-        public static void DeleteAllParticipations(int numberOfParticipations)
-        {
-            for (int i = 0; i < numberOfParticipations; i++)
-            {
-                CasinoRepository.DeleteParticipation(i);
-            }
-        }
-
-
-
-        //WstrzykiwanieDanych
-
-        public static void WstrzykiwanieDanych(int numberOfClient, int numberOfGames, int numberOfPlayedGames, int numberOfParticipation)
-        {
-
-            //wstrzykiwanie klientów
-
-            int number1 = CasinoRepository.GetAllClients().Count();
-
-            for(int i = number1 ; i < number1 + numberOfClient - 1 ; i++)
-            {
-                Clients client = new Clients()
-                {
-                    Id = i,
-                    Name = string.Concat("Imie", i),
-                    Surname = string.Concat("Nazwisko", i),
-                    DataOfBirth = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
-                };
-
-                CasinoRepository.AddClient(client);
-            }
-
-
-            //wstrzykiwanie gier
-
-            int number2 = CasinoRepository.GetAllGames().Count();
-
-            for (int i = number2; i < number2 + numberOfGames - 1; i++)
-            {
-                Games game = new Games()
-                {
-                    Id = i,
-                    GameName = string.Concat("Gra", i),
-                    GameDescription = string.Concat("Opis", i),
-                };
-
-                CasinoRepository.AddGame(game);
-            }
-
-           
-            
-            //wstrzykiwanie rozegranychGier
-
-            int number3 = CasinoRepository.GetAllPlayGames().Count();
-
-            for (int i = number3; i < number3 + numberOfPlayedGames - 1; i++)
-            {
-                PlayGames playGame = new PlayGames()
-                {
-                    Id = i,
-                    Game = i,
-                    StartTime = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
-                    Duration = new TimeSpan(i % 24, i % 60, i % 59 + 1),
-                    MinimumDeposit = i + 10,
-                    EntryFee = i + 20,
-                };
-
-                CasinoRepository.AddPlayedGame(playGame);
-            }
-
-            
-            //wstrzykiwanie zdarzeń
-
-            int number4 = CasinoRepository.GetAllParticipations().Count();
-
-            for (int i = number4; i < number4 + numberOfPlayedGames - 1 ; i++)
-            {
-
-                Participations participation = new Participations()
-                {
-                    Id = i,
-                    Client = i,
-                    PlayedGames = i,
-                    StartTime = new DateTime((2000 + i / 365) % 5000, i % 12 + 1, i % 28 + 1),
-                    Duration = new TimeSpan(i % 24, i % 60, i % 59 + 1),
-                    Profit = i + 120,
-                };
-
-                CasinoRepository.AddParticipation(participation);
-            }
-
-
-
-
-        }
+       
 
     }
 }
