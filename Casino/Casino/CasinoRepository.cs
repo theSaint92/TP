@@ -4,7 +4,7 @@ namespace Casino
 {
     public class CasinoRepository : ICasinoRepository //DataRepository
     {
-        public CasinoContext Context;
+        private CasinoContext Context;
 
         public CasinoRepository(IWstrzykiwanieDanych wstrzykiwanie)
         {
