@@ -51,10 +51,10 @@ namespace Casino
 
         public Client(int id, string name, string surname, DateTime dateOfBirth)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Surname = surname;
-            this.DateOfBirth = dateOfBirth;
+            this._id = id;
+            this._name = name;
+            this._surname = surname;
+            this._dateOfBirth = dateOfBirth;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -12,8 +12,18 @@
     </Window.DataContext>
 
     <StackPanel>
-        <Label Content="Participations:"></Label>
+        <Label Content="Clients List:"></Label>
         <ListBox Name="Some"></ListBox>
-        <Button x:Name="BenjaminButton" Content="Benjamin Button" Command="{Binding AddClientCommand}"></Button>
+        <Label Content="Add Client"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Name: "/>
+            <TextBox Name="NameTextBox" Width="110px"/>
+            <Label Content="Surname: "/>
+            <TextBox Name="SurnameTextBox" Width="110px"/>
+            <Label Content="Date of Birth: "/>
+            <DatePicker Width="110px"/>
+            <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommand}"/>
+        </StackPanel>
+        
     </StackPanel>
 </Window>
