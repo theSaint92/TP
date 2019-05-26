@@ -9,10 +9,10 @@ namespace Casino
     public class WstrzykiwanieIlosciowe : IWstrzykiwanieDanych
     {
 
-        private int numberOfClients;
-        private int numberOfGames;
-        private int numberOfPlayGames;
-        private int numbersOfParticipations;
+        private readonly int numberOfClients;
+        private readonly int numberOfGames;
+        private readonly int numberOfPlayGames;
+        private readonly int numbersOfParticipations;
 
         public WstrzykiwanieIlosciowe(int clients, int games, int playGames, int participations)
         {
