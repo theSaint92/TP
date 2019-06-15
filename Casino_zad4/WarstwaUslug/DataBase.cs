@@ -6,6 +6,22 @@ using System.Threading.Tasks;
 
 namespace WarstwaUslug
 {
+    partial class Client
+    {
+    }
+
+    partial class Game
+    {
+    }
+
+    partial class PlayGame
+    {
+    }
+
+    partial class Participation
+    {
+    }
+
     partial class DataBaseDataContext
     {
     }
