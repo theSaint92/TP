@@ -1,0 +1,29 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        xmlns:vm="clr-namespace:GUI.ViewModel"
+        mc:Ignorable="d"
+        Title="Casino" Height="600" Width="600">
+    <Window.DataContext>
+        <vm:ViewModel/>
+    </Window.DataContext>
+
+    <StackPanel>
+        <Label Content="Clients List:"></Label>
+        <ListBox Name="Some"></ListBox>
+        <Label Content="Add Client"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Name: "/>
+            <TextBox Name="NameTextBox" Width="110px"/>
+            <Label Content="Surname: "/>
+            <TextBox Name="SurnameTextBox" Width="110px"/>
+            <Label Content="Date of Birth: "/>
+            <DatePicker Width="110px"/>
+            <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommand}"/>
+        </StackPanel>
+        
+    </StackPanel>
+</Window>
