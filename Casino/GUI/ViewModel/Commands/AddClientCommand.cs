@@ -20,7 +20,7 @@ namespace GUI.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return false;
         }
 
         public void Execute(object parameter)
