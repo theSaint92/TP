@@ -24,7 +24,7 @@ namespace WarstwaUslug
         }
 
         //create
-        public void AddClient(Clients client)
+        public void AddClient(Client client)
         {
             DataBaseContext.Clients.InsertOnSubmit(client);
 
@@ -40,7 +40,7 @@ namespace WarstwaUslug
 
         }
 
-        public void AddGame(Games game)
+        public void AddGame(Game game)
         {
             DataBaseContext.Games.InsertOnSubmit(game);
 
@@ -56,7 +56,7 @@ namespace WarstwaUslug
         }
 
 
-        public void AddPlayedGame(PlayGames playGame)
+        public void AddPlayedGame(PlayGame playGame)
         {
             DataBaseContext.PlayGames.InsertOnSubmit(playGame);
 
@@ -71,7 +71,7 @@ namespace WarstwaUslug
         }
 
 
-        public void AddParticipation(Participations participation)
+        public void AddParticipation(Participation participation)
         {
             DataBaseContext.Participations.InsertOnSubmit(participation);
 
@@ -130,7 +130,7 @@ namespace WarstwaUslug
         }
         public void DeleteParticipation(int participationId)
         {
-            Participations participation = (from participations in DataBaseContext.Participations
+            Participation participation = (from participations in DataBaseContext.Participations
                                             where participations.Id == participationId
                                             select participations).First();
 
@@ -151,7 +151,7 @@ namespace WarstwaUslug
 
         public void DeletePlayGame(int playGameId)
         {
-            PlayGames playGame = (from playGames in DataBaseContext.PlayGames
+            PlayGame playGame = (from playGames in DataBaseContext.PlayGames
                                   where playGames.Id == playGameId
                                   select playGames).First();
 
