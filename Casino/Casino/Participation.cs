@@ -7,7 +7,7 @@ namespace Casino
     {
         private int _id;
         private Client _participator;
-        private PlayGame _playedGame;
+        private PlayGame _playGame;
         private DateTime _startTime;
         private TimeSpan _duration;
         private double _profit;
@@ -32,11 +32,11 @@ namespace Casino
         }
         public PlayGame PlayedGame
         {
-            get { return _playedGame; }
+            get { return _playGame; }
             set
             {
-                _playedGame = value;
-                OnPropertyChanged("PlayedGame");
+                _playGame = value;
+                OnPropertyChanged("PlayGame");
             }
         }
         public DateTime StartTime
@@ -69,12 +69,12 @@ namespace Casino
 
         public Participation(int id, Client participator, PlayGame playedGame, DateTime startTime, TimeSpan duration, double profit)
         {
-            this._id = id;
-            this._participator = participator;
-            this._playedGame = playedGame;
-            this._startTime = startTime;
-            this._duration = duration;
-            this._profit = profit;
+            this.Id = id;
+            this.Participator = participator;
+            this.PlayedGame = playedGame;
+            this.StartTime = startTime;
+            this.Duration = duration;
+            this.Profit = profit;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

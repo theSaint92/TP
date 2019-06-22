@@ -69,12 +69,12 @@ namespace Casino
 
         public PlayGame(int id, Game game, DateTime startTime, TimeSpan duration, double minimumDeposit, double entryFee)
         {
-            this._id = id;
-            this._game = game;
-            this._startTime = startTime;
-            this._duration = duration;
-            this._minimumDeposit = minimumDeposit;
-            this._entryFee = entryFee;
+            this.Id = id;
+            this.Game = game;
+            this.StartTime = startTime;
+            this.Duration = duration;
+            this.MinimumDeposit = minimumDeposit;
+            this.EntryFee = entryFee;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

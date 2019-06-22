@@ -38,9 +38,9 @@ namespace Casino
 
         public Game(int id, string gameName, string gameDescription)
         {
-            this._id = id;
-            this._gameName = gameName;
-            this._gameDescription = gameDescription;
+            this.Id = id;
+            this.GameName = gameName;
+            this.GameDescription = gameDescription;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
