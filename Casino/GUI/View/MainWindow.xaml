@@ -8,12 +8,23 @@
         mc:Ignorable="d"
         Title="Casino" Height="600" Width="600">
     <Window.DataContext>
+        <!-- TODO Zrobić to tutaj w ten sposób, aby przekazać parametr do konstruktora -->
+        <!--
+        <ObjectDataProvider ObjectType="vm:ViewModel"
+                            xmlns:cas="clr-namespace:Casino;assembly=Casino">
+        </ObjectDataProvider>
+        -->
         <vm:ViewModel/>
     </Window.DataContext>
 
     <StackPanel>
         <Label Content="Clients List:"></Label>
-        <ListBox Name="Some"></ListBox>
+        <DataGrid ItemsSource="{Binding Clients}">
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Surname}" />
+            </DataGrid.Columns>-->
+        </DataGrid>
         <Label Content="Add Client"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Name: "/>
@@ -22,7 +33,7 @@
             <TextBox Name="SurnameTextBox" Width="110px"/>
             <Label Content="Date of Birth: "/>
             <DatePicker Width="110px"/>
-            <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommand}"/>
+            <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommandButton}"/>
         </StackPanel>
         
     </StackPanel>
