@@ -8,40 +8,18 @@ namespace GUI.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        private string _nameToAdd;
-        private string _surnameToAdd;
-        private DateTime _dateOfBirthToAdd;
-        private int currentID = 5;
-
-        public string NameToAdd
+        public Client _clientToAdd;
+        public Client ClientToAdd
         {
-            get { return this._nameToAdd; }
+            get { return this._clientToAdd; }
             set
             {
-                this._nameToAdd = value;
-                OnPropertyChanged("AddClientName");
+                this._clientToAdd = value;
+                OnPropertyChanged("ClientToAdd");
             }
         }
+        private int currentID;
 
-        public string SurnameToAdd
-        {
-            get { return this._surnameToAdd; }
-            set
-            {
-                this._surnameToAdd = value;
-                OnPropertyChanged("AddClientSurname");
-            }
-        }
-
-        public DateTime DateOfBirthToAdd
-        {
-            get { return this._dateOfBirthToAdd; }
-            set
-            {
-                this._dateOfBirthToAdd = value;
-                OnPropertyChanged("AddClientDateOfBirth");
-            }
-        }
 
         private ICasinoRepository CasinoRepository;
         
@@ -73,25 +51,32 @@ namespace GUI.ViewModel
         {
             CasinoRepository = new CasinoRepository(new WstrzykiwanieStalych());
             Clients = new ObservableCollection<Client>(CasinoRepository.GetAllClients());
+            currentID = 0;
+            foreach (Client c in Clients) {
+                if (c.Id >= currentID) currentID = c.Id + 1;
+            }
+            ClientToAdd = new Client(currentID, "", "", new DateTime(1990,1,1));
             AddClientCommandButton = new AddClientCommand(this);
             Console.WriteLine("Clients count: " + Clients.Count);
         }
 
         public void SimpleMethod()
         {
-            Clients.Add(new Client(currentID,NameToAdd,SurnameToAdd,DateOfBirthToAdd));
-            currentID++;
-            NameToAdd = "";
-            SurnameToAdd = "";
-            DateOfBirthToAdd = new DateTime();
+            Clients.Add(ClientToAdd);
+            ClientToAdd = new Client(++currentID, "", "", new DateTime(1990, 1, 1));
         }
 
         public void OnPropertyChanged(string param)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(param));
-            }
+            /** 
+             * Ten kod oznacza dokładnie to samo co to:
+             * 
+             *   if (PropertyChanged != null)
+             *   {
+             *       PropertyChanged(this, new PropertyChangedEventArgs(param));
+             *   }
+             */
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(param));
         }
     }
 }

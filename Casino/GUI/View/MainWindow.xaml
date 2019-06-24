@@ -28,11 +28,11 @@
         <Label Content="Add Client"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Name: "/>
-            <TextBox Name="NameTextBox" Width="110px" Text="{Binding NameToAdd, Mode=TwoWay}"/>
+            <TextBox Name="NameTextBox" Width="110px" Text="{Binding ClientToAdd.Name, Mode=TwoWay}"/>
             <Label Content="Surname: "/>
-            <TextBox Name="SurnameTextBox" Width="110px" Text="{Binding SurnameToAdd, Mode=TwoWay}"/>
+            <TextBox Name="SurnameTextBox" Width="110px" Text="{Binding ClientToAdd.Surname, Mode=TwoWay}"/>
             <Label Content="Date of Birth: "/>
-            <DatePicker Width="110px" SelectedDate="{Binding DateOfBirthToAdd, Mode=TwoWay}"/>
+            <DatePicker Width="110px" SelectedDate="{Binding ClientToAdd.DateOfBirth, Mode=TwoWay}"/>
             <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommandButton}"/>
         </StackPanel>
         
