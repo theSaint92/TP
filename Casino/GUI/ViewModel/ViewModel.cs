@@ -8,22 +8,54 @@ namespace GUI.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        Client clientInAddClientField;
+        private string _nameToAdd;
+        private string _surnameToAdd;
+        private DateTime _dateOfBirthToAdd;
+        private int currentID = 5;
+
+        public string NameToAdd
+        {
+            get { return this._nameToAdd; }
+            set
+            {
+                this._nameToAdd = value;
+                OnPropertyChanged("AddClientName");
+            }
+        }
+
+        public string SurnameToAdd
+        {
+            get { return this._surnameToAdd; }
+            set
+            {
+                this._surnameToAdd = value;
+                OnPropertyChanged("AddClientSurname");
+            }
+        }
+
+        public DateTime DateOfBirthToAdd
+        {
+            get { return this._dateOfBirthToAdd; }
+            set
+            {
+                this._dateOfBirthToAdd = value;
+                OnPropertyChanged("AddClientDateOfBirth");
+            }
+        }
+
         private ICasinoRepository CasinoRepository;
-        public ObservableCollection<Client> _clients;
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ObservableCollection<Client> _clients;
         public ObservableCollection<Client> Clients
         {
             get { return this._clients; }
             set
             {
                 this._clients = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Clients"));
-                }
+                OnPropertyChanged("Clients");
             }
         }
         public AddClientCommand AddClientCommandButton { get; set; }
@@ -47,8 +79,19 @@ namespace GUI.ViewModel
 
         public void SimpleMethod()
         {
-            Clients.Add(clientInAddClientField);
-            clientInAddClientField = new Client(0, "ClientName", "ClientSurname", new DateTime(0));
+            Clients.Add(new Client(currentID,NameToAdd,SurnameToAdd,DateOfBirthToAdd));
+            currentID++;
+            NameToAdd = "";
+            SurnameToAdd = "";
+            DateOfBirthToAdd = new DateTime();
+        }
+
+        public void OnPropertyChanged(string param)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(param));
+            }
         }
     }
 }
