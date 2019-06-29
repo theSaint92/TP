@@ -148,7 +148,7 @@ namespace DatabaseCasinoModel
             return allPlayGames;
         }
 
-        public Clients GetClient(int clientId)
+        public static Clients GetClient(int clientId)
         {
             Clients client = (from clients in DataBaseContext.Clients
                               where clients.Id == clientId
@@ -157,7 +157,7 @@ namespace DatabaseCasinoModel
             return client;
         }
 
-        public Games GetGame(int gameId)
+        public static Games GetGame(int gameId)
         {
             Games game = (from games in DataBaseContext.Games
                           where games.Id == gameId
@@ -166,7 +166,7 @@ namespace DatabaseCasinoModel
             return game;
         }
 
-        public Participations GetPatricipation(int participationId)
+        public static Participations GetPatricipation(int participationId)
         {
             Participations participation = (from participations in DataBaseContext.Participations
                                             where participations.Id == participationId
@@ -175,7 +175,7 @@ namespace DatabaseCasinoModel
             return participation;
         }
 
-        public PlayGames GetPlayGame(int playGameId)
+        public static PlayGames GetPlayGame(int playGameId)
         {
             PlayGames playGame = (from playGames in DataBaseContext.PlayGames
                                   where playGames.Id == playGameId
@@ -184,7 +184,7 @@ namespace DatabaseCasinoModel
             return playGame;
         }
 
-        public void UpdateClient(Clients client)
+        public static void UpdateClient(Clients client)
         {
             Clients updateClient = DataBaseContext.Clients.Single(p => p.Id == client.Id);
 
@@ -195,7 +195,7 @@ namespace DatabaseCasinoModel
             SaveChanges();
         }
 
-        public void UpdateGame(Games game)
+        public static void UpdateGame(Games game)
         {
             Games updateGame = DataBaseContext.Games.Single(p => p.Id == game.Id);
 
@@ -206,7 +206,7 @@ namespace DatabaseCasinoModel
 
         }
 
-        public void UpdatePlayGame(PlayGames playGame)
+        public static void UpdatePlayGame(PlayGames playGame)
         {
             PlayGames updatePlayGame = DataBaseContext.PlayGames.Single(p => p.Id == playGame.Id);
 
@@ -220,7 +220,7 @@ namespace DatabaseCasinoModel
             SaveChanges();
         }
 
-        public void UpdateParticipation(Participations participation)
+        public static void UpdateParticipation(Participations participation)
         {
             Participations updateParticipation = DataBaseContext.Participations.Single(p => p.Id == participation.Id);
 

@@ -107,97 +107,95 @@ namespace DatabaseCasinoModel.Tests
         [TestMethod()]
         public void DeleteClientTest()
         {
-            Assert.Fail();
+            int iloscGraczyPrzed = DatabaseCasinoRepository.GetAllClients().Count();
+
+            Clients gracz = DatabaseCasinoRepository.GetAllClients().Last();
+
+            DatabaseCasinoRepository.DeleteClient(gracz.Id);
+
+            int iloscGraczyPo = DatabaseCasinoRepository.GetAllClients().Count();
+
+            Assert.AreEqual(iloscGraczyPrzed - 1, iloscGraczyPo);
         }
 
         [TestMethod()]
         public void DeleteGameTest()
         {
-            Assert.Fail();
+            
+            int iloscGierPrzed = DatabaseCasinoRepository.GetAllGames().Count();
+
+            Games gra = DatabaseCasinoRepository.GetAllGames().Last();
+
+            DatabaseCasinoRepository.DeleteGame(gra.Id);
+
+            int iloscGierPo = DatabaseCasinoRepository.GetAllGames().Count();
+
+            Assert.AreEqual(iloscGierPrzed - 1, iloscGierPo);
         }
 
         [TestMethod()]
         public void DeleteParticipationTest()
         {
-            Assert.Fail();
+           
+            int iloscZdarzenPrzed = DatabaseCasinoRepository.GetAllParticipations().Count();
+
+            Participations zdarzenie = DatabaseCasinoRepository.GetAllParticipations().Last();
+
+            DatabaseCasinoRepository.DeleteParticipation(zdarzenie.Id);
+
+            int iloscZdarzenPo = DatabaseCasinoRepository.GetAllParticipations().Count();
+
+            Assert.AreEqual(iloscZdarzenPrzed - 1, iloscZdarzenPo);
         }
 
-        [TestMethod()]
-        public void DeletePlayGameTest()
-        {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void GetAllClientsTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetAllGamesTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetAllParticipationsTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetAllPlayGamesTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetClientTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetGameTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetParticipationTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetPlayGameTest()
-        {
-            Assert.Fail();
-        }
 
         [TestMethod()]
         public void UpdateClientTest()
         {
-            Assert.Fail();
+            Clients gracz = DatabaseCasinoRepository.GetClient(0);
+            gracz.Surname = "nowenazwisko";
+
+            DatabaseCasinoRepository.UpdateClient(gracz);
+
+            Clients tester = DatabaseCasinoRepository.GetClient(0);
+            Assert.AreEqual("nowenazwisko", tester.Surname);
         }
 
         [TestMethod()]
         public void UpdateGameTest()
         {
-            Assert.Fail();
+            Games gra = DatabaseCasinoRepository.GetGame(0);
+            gra.GameName = "Nowa nazwa";
+
+            DatabaseCasinoRepository.UpdateGame(gra);
+
+            Games tester = DatabaseCasinoRepository.GetGame(0);
+            Assert.AreEqual("Nowa nazwa", tester.GameName);
         }
 
         [TestMethod()]
         public void UpdateParticipationTest()
         {
-            Assert.Fail();
+            Participations zdarzenie = DatabaseCasinoRepository.GetPatricipation(0);
+            zdarzenie.Participator = 1;
+
+            DatabaseCasinoRepository.UpdateParticipation(zdarzenie);
+
+            Participations tester = DatabaseCasinoRepository.GetPatricipation(0);
+            Assert.AreEqual(1, tester.Participator);
         }
 
         [TestMethod()]
         public void UpdatePlayGameTest()
         {
-            Assert.Fail();
+            PlayGames rozegranaGra = DatabaseCasinoRepository.GetPlayGame(0);
+            rozegranaGra.MinimumDeposit = 666;
+
+            DatabaseCasinoRepository.UpdatePlayGame(rozegranaGra);
+
+            PlayGames tester = DatabaseCasinoRepository.GetPlayGame(0);
+            Assert.AreEqual(666, tester.MinimumDeposit);
         }
     }
 }
