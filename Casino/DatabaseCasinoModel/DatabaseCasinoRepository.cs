@@ -2,6 +2,7 @@
 using DatabaseCasinoModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,12 +116,17 @@ namespace DatabaseCasinoModel
             SaveChanges();
         }
 
-        public static IEnumerable<Clients> GetAllClients()
+        public static ObservableCollection<Clients> GetAllClients()
         {
             List<Clients> allClients = (from clients in DataBaseContext.Clients
                                         select clients).ToList();
 
-            return allClients;
+            //Convert to observable collection
+            ObservableCollection<Clients> result = new ObservableCollection<Clients>();
+            foreach (Clients c in allClients)
+                result.Add(c);
+
+            return result;
         }
 
         public static IEnumerable<Games> GetAllGames()

@@ -126,13 +126,9 @@
     <Resource Include="Casino_diamond.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Casino\Casino.csproj">
-      <Project>{e30103ae-13f1-42aa-b8c8-e4a1d472df22}</Project>
-      <Name>Casino</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestData\TestData.csproj">
-      <Project>{3f90bb72-ebc2-45cb-9ab0-384f9181ad07}</Project>
-      <Name>TestData</Name>
+    <ProjectReference Include="..\DatabaseCasinoModel\DatabaseCasinoModel.csproj">
+      <Project>{bbc9ced6-b518-4c78-b1da-efb6070ce9e6}</Project>
+      <Name>DatabaseCasinoModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
