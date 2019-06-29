@@ -1,111 +1,236 @@
-﻿using System;
+﻿using Casino;
+using DatabaseCasinoModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Casino
+namespace DatabaseCasinoModel
 {
-    public class DatabaseCasinoRepository : ICasinoRepository
-    {
-        public void AddClient(Client client)
+    public class DatabaseCasinoRepository
+    { 
+        private static CasinoDataContext DataBaseContext;
+
+        public static CasinoDataContext Context
         {
-            throw new NotImplementedException();
+            get => DataBaseContext;
+            set => DataBaseContext = value;
+
         }
 
-        public void AddGame(Game game)
+        //SaveChanges
+        public static void SaveChanges()
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataBaseContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+            }
+
         }
 
-        public void AddParticipation(Participation participation)
+
+        //create
+        public static void AddClient(Clients client)
         {
-            throw new NotImplementedException();
+            DataBaseContext.Clients.InsertOnSubmit(client);
+            SaveChanges();
         }
 
-        public void AddPlayGame(PlayGame playGame)
+
+        public static void AddGame(Games game)
         {
-            throw new NotImplementedException();
+            DataBaseContext.Games.InsertOnSubmit(game);
+            SaveChanges();
         }
 
-        public bool DeleteClient(int clientId)
+        public static void AddParticipation(Participations participation)
         {
-            throw new NotImplementedException();
+            DataBaseContext.Participations.InsertOnSubmit(participation);
+            SaveChanges();
         }
 
-        public bool DeleteGame(int gameId)
+        public static void AddPlayGame(PlayGames playGame)
         {
-            throw new NotImplementedException();
+            DataBaseContext.PlayGames.InsertOnSubmit(playGame);
+            SaveChanges();
         }
 
-        public bool DeleteParticipation(int participationId)
+        public static void DeleteClient(int id)
         {
-            throw new NotImplementedException();
+            Clients client = (from clients in DataBaseContext.Clients
+                              where clients.Id == id
+                              select clients).First();
+
+            if (client != null)
+            {
+                DataBaseContext.Clients.DeleteOnSubmit(client);
+            }
+
+            SaveChanges();
         }
 
-        public bool DeletePlayGame(int playGameId)
+        public static void DeleteGame(int gameId)
         {
-            throw new NotImplementedException();
+            Games game = (from games in DataBaseContext.Games
+                          where games.Id == gameId
+                          select games).First();
+
+            if (game != null)
+            {
+                DataBaseContext.Games.DeleteOnSubmit(game);
+            }
+
+            SaveChanges();
         }
 
-        public IEnumerable<Client> GetAllClients()
+        public static void DeleteParticipation(int participationId)
         {
-            throw new NotImplementedException();
+            Participations participation = (from participations in DataBaseContext.Participations
+                                           where participations.Id == participationId
+                                           select participations).First();
+
+            if (participation != null)
+            {
+                DataBaseContext.Participations.DeleteOnSubmit(participation);
+            }
+
+            SaveChanges();
         }
 
-        public IEnumerable<KeyValuePair<int, Game>> GetAllGames()
+        public static void DeletePlayGame(int playGameId)
         {
-            throw new NotImplementedException();
+            PlayGames playGame = (from playGames in DataBaseContext.PlayGames
+                                 where playGames.Id == playGameId
+                                 select playGames).First();
+
+            if (playGame != null)
+            {
+                DataBaseContext.PlayGames.DeleteOnSubmit(playGame);
+            }
+
+            SaveChanges();
         }
 
-        public IEnumerable<Participation> GetAllParticipations()
+        public static IEnumerable<Clients> GetAllClients()
         {
-            throw new NotImplementedException();
+            List<Clients> allClients = (from clients in DataBaseContext.Clients
+                                        select clients).ToList();
+
+            return allClients;
         }
 
-        public IEnumerable<PlayGame> GetAllPlayGames()
+        public static IEnumerable<Games> GetAllGames()
         {
-            throw new NotImplementedException();
+            List<Games> allGames = (from games in DataBaseContext.Games
+                                    select games).ToList();
+
+            return allGames;
         }
 
-        public Client GetClient(int clientId)
+        public static IEnumerable<Participations> GetAllParticipations()
         {
-            throw new NotImplementedException();
+            List<Participations> allPatricipations = (from patricipations in DataBaseContext.Participations
+                                                      select patricipations).ToList();
+
+            return allPatricipations;
         }
 
-        public Game GetGame(int gameId)
+
+        public static IEnumerable<PlayGames> GetAllPlayGames()
         {
-            throw new NotImplementedException();
+            List<PlayGames> allPlayGames = (from playGames in DataBaseContext.PlayGames
+                                            select playGames).ToList();
+
+            return allPlayGames;
         }
 
-        public Participation GetParticipation(int participationId)
+        public Clients GetClient(int clientId)
         {
-            throw new NotImplementedException();
+            Clients client = (from clients in DataBaseContext.Clients
+                              where clients.Id == clientId
+                              select clients).First();
+
+            return client;
         }
 
-        public PlayGame GetPlayGame(int playGameId)
+        public Games GetGame(int gameId)
         {
-            throw new NotImplementedException();
+            Games game = (from games in DataBaseContext.Games
+                          where games.Id == gameId
+                          select games).First();
+
+            return game;
         }
 
-        public bool UpdateClient(Client client)
+        public Participations GetPatricipation(int participationId)
         {
-            throw new NotImplementedException();
+            Participations participation = (from participations in DataBaseContext.Participations
+                                            where participations.Id == participationId
+                                            select participations).First();
+
+            return participation;
         }
 
-        public bool UpdateGame(Game game)
+        public PlayGames GetPlayGame(int playGameId)
         {
-            throw new NotImplementedException();
+            PlayGames playGame = (from playGames in DataBaseContext.PlayGames
+                                  where playGames.Id == playGameId
+                                  select playGames).First();
+
+            return playGame;
         }
 
-        public bool UpdateParticipation(Participation participation)
+        public void UpdateClient(Clients client)
         {
-            throw new NotImplementedException();
+            Clients updateClient = DataBaseContext.Clients.Single(p => p.Id == client.Id);
+
+            updateClient.Name = client.Name;
+            updateClient.Surname = client.Surname;
+            updateClient.DateOfBirth = client.DateOfBirth;
+
+            SaveChanges();
         }
 
-        public bool UpdatePlayGame(PlayGame playGame)
+        public void UpdateGame(Games game)
         {
-            throw new NotImplementedException();
+            Games updateGame = DataBaseContext.Games.Single(p => p.Id == game.Id);
+
+            updateGame.GameName = game.GameName;
+            updateGame.GameDescription = game.GameDescription;
+
+            SaveChanges();
+
+        }
+
+        public void UpdatePlayGame(PlayGames playGame)
+        {
+            PlayGames updatePlayGame = DataBaseContext.PlayGames.Single(p => p.Id == playGame.Id);
+
+            updatePlayGame.Game = playGame.Game;
+            updatePlayGame.StartTime = playGame.StartTime;
+            updatePlayGame.Duration = playGame.Duration;
+            updatePlayGame.MinimumDeposit = playGame.MinimumDeposit;
+            updatePlayGame.EntryFee = playGame.EntryFee;
+
+
+            SaveChanges();
+        }
+
+        public void UpdateParticipation(Participations participation)
+        {
+            Participations updateParticipation = DataBaseContext.Participations.Single(p => p.Id == participation.Id);
+
+            updateParticipation.Clients = participation.Clients;
+            updateParticipation.PlayGames = participation.PlayGames;
+            updateParticipation.StartTime = participation.StartTime;
+            updateParticipation.Duration = participation.Duration;
+            updateParticipation.Profit = participation.Profit;
+
+            SaveChanges();
         }
     }
 }

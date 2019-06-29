@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Casino" Class="CasinoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Casino.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="DatabaseCasinoModel.Properties.Settings" SettingsPropertyName="CasinoConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Clients" Member="Clients">
+    <Type Name="Clients">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Surname" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Clients_Participations" Member="Participations" ThisKey="Id" OtherKey="Participator" Type="Participations" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Games" Member="Games">
+    <Type Name="Games">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GameName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="GameDescription" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Association Name="Games_PlayGames" Member="PlayGames" ThisKey="Id" OtherKey="Game" Type="PlayGames" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PlayGames" Member="PlayGames">
+    <Type Name="PlayGames">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Game" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Duration" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="MinimumDeposit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="EntryFee" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="PlayGames_Participations" Member="Participations" ThisKey="Id" OtherKey="PlayedGame" Type="Participations" />
+      <Association Name="Games_PlayGames" Member="Games" ThisKey="Game" OtherKey="Id" Type="Games" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Participations" Member="Participations">
+    <Type Name="Participations">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Participator" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PlayedGame" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Duration" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Profit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Clients_Participations" Member="Clients" ThisKey="Participator" OtherKey="Id" Type="Clients" IsForeignKey="true" />
+      <Association Name="PlayGames_Participations" Member="PlayGames" ThisKey="PlayedGame" OtherKey="Id" Type="PlayGames" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

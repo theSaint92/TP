@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Casino">
+  <DataContextMoniker Name="/CasinoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="983bcc89-dcad-42ba-890f-7f4334af0016" absoluteBounds="0.75, 0.875, 2.25, 1.5785953776041666">
+      <DataClassMoniker Name="/CasinoDataContext/Clients" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7f4e85b4-7b1a-48a2-b989-dd12bb9da502" absoluteBounds="0.765, 1.335, 2.2199999999999998, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9d2a003d-b5ff-4704-b740-072bb00ae248" absoluteBounds="6.25, 1.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CasinoDataContext/Games" />
+      <nestedChildShapes>
+        <elementListCompartment Id="070b47b4-f86f-4647-b534-802731a02205" absoluteBounds="6.2650000000000006, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3f22ca5d-5fb8-4ea7-a103-7b8ff37fc668" absoluteBounds="2.875, 3.375, 2, 1.9631982421875">
+      <DataClassMoniker Name="/CasinoDataContext/PlayGames" />
+      <nestedChildShapes>
+        <elementListCompartment Id="636aee26-a581-499c-9aa5-4994671cb787" absoluteBounds="2.89, 3.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.25 : 2.7612939453125); (7.25 : 4.35659912109375); (4.875 : 4.35659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CasinoDataContext/Games/Games_PlayGames" />
+      <nodes>
+        <classShapeMoniker Id="9d2a003d-b5ff-4704-b740-072bb00ae248" />
+        <classShapeMoniker Id="3f22ca5d-5fb8-4ea7-a103-7b8ff37fc668" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e9a12348-6abc-438e-b463-1734f6fab7b7" absoluteBounds="3.625, 0.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/CasinoDataContext/Participations" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47f3d04b-fbd9-4883-90f9-05645b73cab1" absoluteBounds="3.6399999999999997, 1.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3 : 1.66429768880208); (3.625 : 1.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CasinoDataContext/Clients/Clients_Participations" />
+      <nodes>
+        <classShapeMoniker Id="983bcc89-dcad-42ba-890f-7f4334af0016" />
+        <classShapeMoniker Id="e9a12348-6abc-438e-b463-1734f6fab7b7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.25 : 3.375); (4.25 : 2.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CasinoDataContext/PlayGames/PlayGames_Participations" />
+      <nodes>
+        <classShapeMoniker Id="3f22ca5d-5fb8-4ea7-a103-7b8ff37fc668" />
+        <classShapeMoniker Id="e9a12348-6abc-438e-b463-1734f6fab7b7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
