@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace DatabaseCasinoModel.Tests
 {
@@ -12,12 +13,15 @@ namespace DatabaseCasinoModel.Tests
     public class DatabaseCasinoRepositoryTests
     {
 
+        
+
 
         [TestInitialize]
         public void TestInitialize()
         {
             DatabaseCasinoRepository.Context = new CasinoDataContext();
         }
+
 
 
         [TestMethod()]
@@ -197,5 +201,41 @@ namespace DatabaseCasinoModel.Tests
             PlayGames tester = DatabaseCasinoRepository.GetPlayGame(0);
             Assert.AreEqual(666, tester.MinimumDeposit);
         }
+
+        [TestMethod()]
+        public void ChangeClientsTest()
+        {
+            ObservableCollection<Clients> clients = DatabaseCasinoRepository.GetAllClients();
+            ObservableCollection<Clients> newClients = new ObservableCollection<Clients>();
+
+            Clients gracz = new Clients()
+            {
+                Id = 0,
+                Name = "Stefan",
+                Surname = "Ząbek",
+                DateOfBirth = new DateTime(1983, 2, 4)
+            };
+
+            Clients gracz1 = new Clients()
+            {
+                Id = 1,
+                Name = "Stefano",
+                Surname = "Ząbek",
+                DateOfBirth = new DateTime(1983, 2, 4)
+            };
+
+            newClients.Add(gracz);
+            newClients.Add(gracz1);
+
+
+            DatabaseCasinoRepository.ChangeClients(newClients);
+            int iloscGraczy = DatabaseCasinoRepository.GetAllClients().Count();
+
+
+            Assert.AreEqual(iloscGraczy, 2);
+            Assert.AreEqual("Stefan", DatabaseCasinoRepository.GetAllClients().First().Name);
+
+        }
+
     }
 }

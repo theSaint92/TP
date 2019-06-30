@@ -129,29 +129,41 @@ namespace DatabaseCasinoModel
             return result;
         }
 
-        public static IEnumerable<Games> GetAllGames()
+        public static ObservableCollection<Games> GetAllGames()
         {
             List<Games> allGames = (from games in DataBaseContext.Games
                                     select games).ToList();
 
-            return allGames;
+            ObservableCollection<Games> result = new ObservableCollection<Games>();
+            foreach (Games c in allGames)
+                result.Add(c);
+
+            return result;
         }
 
-        public static IEnumerable<Participations> GetAllParticipations()
+        public static ObservableCollection<Participations> GetAllParticipations()
         {
             List<Participations> allPatricipations = (from patricipations in DataBaseContext.Participations
                                                       select patricipations).ToList();
 
-            return allPatricipations;
+            ObservableCollection<Participations> result = new ObservableCollection<Participations>();
+            foreach (Participations c in allPatricipations)
+                result.Add(c);
+
+            return result;
         }
 
 
-        public static IEnumerable<PlayGames> GetAllPlayGames()
+        public static ObservableCollection<PlayGames> GetAllPlayGames()
         {
             List<PlayGames> allPlayGames = (from playGames in DataBaseContext.PlayGames
                                             select playGames).ToList();
 
-            return allPlayGames;
+            ObservableCollection<PlayGames> result = new ObservableCollection<PlayGames>();
+            foreach (PlayGames c in allPlayGames)
+                result.Add(c);
+
+            return result;
         }
 
         public static Clients GetClient(int clientId)
@@ -238,5 +250,26 @@ namespace DatabaseCasinoModel
 
             SaveChanges();
         }
+
+        public static void ChangeClients(ObservableCollection<Clients> listOfClients)
+        {
+
+            int iloscGraczy = 0;
+            if(DatabaseCasinoRepository.GetAllClients().Count() != 0)
+            {
+                iloscGraczy = DatabaseCasinoRepository.GetAllClients().Last().Id + 1;
+            }
+
+            for(int i = 0; i < iloscGraczy; i ++ )
+            {
+                DatabaseCasinoRepository.DeleteClient(i);
+            }
+
+            foreach (Clients client in listOfClients)
+                DatabaseCasinoRepository.AddClient(client);
+
+        }
+
+    
     }
 }
