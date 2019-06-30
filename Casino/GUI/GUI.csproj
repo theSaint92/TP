@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ViewModel\Commands\AddClientCommand.cs" />
+    <Compile Include="ViewModel\Commands\CommitChangesCommand.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

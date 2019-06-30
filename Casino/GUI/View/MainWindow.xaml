@@ -19,11 +19,54 @@
 
     <StackPanel>
         <Label Content="Clients List:"></Label>
-        <DataGrid ItemsSource="{Binding ClientsCollection}" CanUserDeleteRows="True" CanUserAddRows="False">
-            <!--<DataGrid.Columns>
+        <DataGrid ItemsSource="{Binding ClientsCollection}" CanUserDeleteRows="True" CanUserAddRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="First Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Last Name" Binding="{Binding Surname}" />
-            </DataGrid.Columns>-->
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel Background="GhostWhite">
+                        <Image DockPanel.Dock="Left" Source="http://icons.iconarchive.com/icons/jonathan-rey/simpsons/128/Bart-Simpson-01-icon.png" Height="128" Margin="10" />
+                        <StackPanel>
+                            <Grid Margin="0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Id: " FontWeight="Bold" />
+                                <TextBlock Text="{Binding Id}" Grid.Column="1" />
+                                <TextBlock Text="First Name: " FontWeight="Bold" Grid.Row="1" />
+                                <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
+                                <TextBlock Text="Last Name: " FontWeight="Bold" Grid.Row="2" />
+                                <TextBlock Text="{Binding Surname}" Grid.Column="1" Grid.Row="2" />
+                                <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="3" />
+                                <TextBlock Text="{Binding DateOfBirth, StringFormat=d}" Grid.Column="1" Grid.Row="3" />
+                                
+                            </Grid>
+                            <TextBlock Text="Participations: " FontWeight="Bold" />
+                            <DataGrid ItemsSource="{Binding Participations}" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                                    <DataGridTextColumn Header="Played Game Id" Binding="{Binding PlayedGame}" />
+                                    <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime}" />
+                                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
+                                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
         <Label Content="Add Client"/>
         <StackPanel Orientation="Horizontal">
@@ -35,6 +78,8 @@
             <DatePicker Width="110px" SelectedDate="{Binding ClientToAdd.DateOfBirth, Mode=TwoWay}"/>
             <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommandButton}"/>
         </StackPanel>
+        <Button x:Name="CommitChanges" Width="60px"  Content="Commit" Command="{Binding CommitChangesButton}"/>
+        
         
     </StackPanel>
 </Window>

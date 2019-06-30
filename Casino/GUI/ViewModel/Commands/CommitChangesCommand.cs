@@ -1,5 +1,4 @@
-﻿using DatabaseCasinoModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +7,13 @@ using System.Windows.Input;
 
 namespace GUI.ViewModel.Commands
 {
-    public class AddClientCommand : ICommand
+    public class CommitChangesCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
         private ViewModel ViewModel { get; set; }
 
-        public AddClientCommand(ViewModel v)
+        public CommitChangesCommand(ViewModel v)
         {
             this.ViewModel = v;
         }
@@ -26,12 +25,7 @@ namespace GUI.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            ViewModel.ClientsCollection.Add(ViewModel.ClientToAdd);
-            ViewModel.ClientToAdd = new Clients
-            {
-                Id = ViewModel.currentID++,
-                DateOfBirth = new DateTime(1990, 1, 1)
-            };
+            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace GUI.ViewModel
                 OnPropertyChanged("ClientToAdd");
             }
         }
-        private int currentID;
+        public int currentID;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,6 +33,7 @@ namespace GUI.ViewModel
             }
         }
         public AddClientCommand AddClientCommandButton { get; set; }
+        public CommitChangesCommand CommitChangesCommandButton { get; set; }
 
         // TODO : Uncomment this later
         //public ViewModel(ICasinoRepository casinoRepository)
@@ -47,7 +48,7 @@ namespace GUI.ViewModel
         {
             DatabaseCasinoRepository.Context = new CasinoDataContext();
             ClientsCollection = DatabaseCasinoRepository.GetAllClients();
-            //Clients = new ObservableCollection<Clients>();
+
             currentID = 0;
             foreach (Clients c in ClientsCollection) {
                 if (c.Id >= currentID) currentID = c.Id + 1;
@@ -58,18 +59,9 @@ namespace GUI.ViewModel
                 DateOfBirth = new DateTime(1990, 1, 1)
             };
             AddClientCommandButton = new AddClientCommand(this);
+            CommitChangesCommandButton = new CommitChangesCommand(this);
+
             Console.WriteLine("Clients count: " + ClientsCollection.Count);
-        }
-
-        public void SimpleMethod()
-        {
-            ClientsCollection.Add(ClientToAdd);
-            ClientToAdd = new Clients
-            {
-                Id = currentID++,
-                DateOfBirth = new DateTime(1990, 1, 1)
-            };
-
         }
 
         public void OnPropertyChanged(string param)
