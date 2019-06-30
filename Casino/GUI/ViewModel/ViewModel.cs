@@ -35,6 +35,17 @@ namespace GUI.ViewModel
         public AddClientCommand AddClientCommandButton { get; set; }
         public CommitChangesCommand CommitChangesCommandButton { get; set; }
 
+        private string _waitingString;
+        public string WaitingString
+        {
+            get { return this._waitingString; }
+            set
+            {
+                this._waitingString = value;
+                OnPropertyChanged("WaitingString");
+            }
+        }
+
         // TODO : Uncomment this later
         //public ViewModel(ICasinoRepository casinoRepository)
         //{

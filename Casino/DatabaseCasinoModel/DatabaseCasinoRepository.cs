@@ -66,6 +66,20 @@ namespace DatabaseCasinoModel
                               where clients.Id == id
                               select clients).First();
 
+           
+            //Delete client participations:
+            if (client != null)
+            {
+                List<int> ids = new List<int>();
+                foreach (Participations p in client.Participations)
+                    ids.Add(p.Id);
+
+                foreach (int i in ids)
+                    DeleteParticipation(i);                
+            }
+                
+     
+
             if (client != null)
             {
                 DataBaseContext.Clients.DeleteOnSubmit(client);
@@ -253,20 +267,62 @@ namespace DatabaseCasinoModel
 
         public static void ChangeClients(ObservableCollection<Clients> listOfClients)
         {
+            ObservableCollection<Clients> clientsInDb = GetAllClients();
+            Console.WriteLine(clientsInDb);
+            Console.WriteLine(listOfClients);
 
-            int iloscGraczy = 0;
-            if(DatabaseCasinoRepository.GetAllClients().Count() != 0)
+
+            List<int> idsToDelete = new List<int>();
+            foreach (Clients c in clientsInDb)
             {
-                iloscGraczy = DatabaseCasinoRepository.GetAllClients().Last().Id + 1;
+                bool contains = false;
+                foreach (Clients c2 in listOfClients)
+                {
+                    if (c2.Equals(c))
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    idsToDelete.Add(c.Id);
+                }
             }
 
-            for(int i = 0; i < iloscGraczy; i ++ )
+            foreach (int i in idsToDelete)
             {
-                DatabaseCasinoRepository.DeleteClient(i);
+                DeleteClient(i);
             }
 
-            foreach (Clients client in listOfClients)
-                DatabaseCasinoRepository.AddClient(client);
+            foreach (Clients c in listOfClients)
+            {
+                bool contains = false;
+                foreach (Clients c2 in clientsInDb)
+                {
+                    if (c2.Equals(c))
+                    {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                {
+                    AddClient(c);
+                }
+            }
+
+            //int iloscGraczy = 0;
+            //if(DatabaseCasinoRepository.GetAllClients().Count() != 0)
+            //{
+            //    iloscGraczy = DatabaseCasinoRepository.GetAllClients().Last().Id + 1;
+            //}
+            //
+            //for(int i = 0; i < iloscGraczy; i ++ )
+            //{
+            //    DatabaseCasinoRepository.DeleteClient(i);
+            //}
+            //
+            //foreach (Clients client in listOfClients)
+            //    DatabaseCasinoRepository.AddClient(client);
 
         }
 

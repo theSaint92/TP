@@ -17,9 +17,16 @@
         <vm:ViewModel/>
     </Window.DataContext>
 
-    <StackPanel>
-        <Label Content="Clients List:"></Label>
-        <DataGrid ItemsSource="{Binding ClientsCollection}" CanUserDeleteRows="True" CanUserAddRows="False" AutoGenerateColumns="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Clients List:"></Label>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ClientsCollection}" CanUserDeleteRows="True" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="First Name" Binding="{Binding Name}" />
@@ -68,18 +75,36 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <Label Content="Add Client"/>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Name: "/>
-            <TextBox Name="NameTextBox" Width="110px" Text="{Binding ClientToAdd.Name, Mode=TwoWay}"/>
-            <Label Content="Surname: "/>
-            <TextBox Name="SurnameTextBox" Width="110px" Text="{Binding ClientToAdd.Surname, Mode=TwoWay}"/>
-            <Label Content="Date of Birth: "/>
-            <DatePicker Width="110px" SelectedDate="{Binding ClientToAdd.DateOfBirth, Mode=TwoWay}"/>
-            <Button x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommandButton}"/>
-        </StackPanel>
-        <Button x:Name="CommitChanges" Width="60px"  Content="Commit" Command="{Binding CommitChangesButton}"/>
-        
-        
-    </StackPanel>
+        <Label Grid.Row="2" Content="Add Client:"/>
+        <DockPanel Margin="3" Grid.Row="3">
+            <Border CornerRadius="2" BorderBrush="Gray" BorderThickness="1" DockPanel.Dock="Top" Padding="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Name: "/>
+                    <TextBox Grid.Column="1" Name="NameTextBox" Text="{Binding ClientToAdd.Name, Mode=TwoWay}"/>
+                    <Label Grid.Column="2" Content="Surname: "/>
+                    <TextBox Grid.Column="3" Name="SurnameTextBox" Text="{Binding ClientToAdd.Surname, Mode=TwoWay}"/>
+                    <Label Grid.Column="4" Content="Date of Birth: "/>
+                    <DatePicker Grid.Column="5" Width="110px" SelectedDate="{Binding ClientToAdd.DateOfBirth, Mode=TwoWay}"/>
+                    <Button Grid.Column="6" x:Name="AddClientButton" Width="60px"  Content="Submit" Command="{Binding AddClientCommandButton}"/>
+                </Grid>
+            </Border>
+        </DockPanel>
+        <Grid Grid.Row="4" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" x:Name="WaitingTextTextBlock" Text="{Binding WaitingString}"/>
+            <Button Height="25" Grid.Column="1" x:Name="CommitChanges" Content="Commit Changes" Command="{Binding CommitChangesCommandButton}"/>
+        </Grid>
+    </Grid>
 </Window>
