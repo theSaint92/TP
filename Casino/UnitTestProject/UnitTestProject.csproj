@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCasinoRepositoryTests.cs" />
+    <Compile Include="GUITest.cs" />
     <Compile Include="WstrzykiwanieIloscioweTest.cs" />
     <Compile Include="CasinoRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,10 @@
     <ProjectReference Include="..\DatabaseCasinoModel\DatabaseCasinoModel.csproj">
       <Project>{BBC9CED6-B518-4C78-B1DA-EFB6070CE9E6}</Project>
       <Name>DatabaseCasinoModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GUI\GUI.csproj">
+      <Project>{80572ef6-f49d-4eaf-af05-bd952901a22a}</Project>
+      <Name>GUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestData\TestData.csproj">
       <Project>{3f90bb72-ebc2-45cb-9ab0-384f9181ad07}</Project>

@@ -268,22 +268,14 @@ namespace DatabaseCasinoModel
         public static void ChangeClients(ObservableCollection<Clients> listOfClients)
         {
             ObservableCollection<Clients> clientsInDb = GetAllClients();
-            Console.WriteLine(clientsInDb);
-            Console.WriteLine(listOfClients);
 
+            Console.WriteLine("IM HERE!");
 
             List<int> idsToDelete = new List<int>();
             foreach (Clients c in clientsInDb)
             {
-                bool contains = false;
-                foreach (Clients c2 in listOfClients)
-                {
-                    if (c2.Equals(c))
-                    {
-                        contains = true;
-                    }
-                }
-                if (!contains)
+                Console.Write("ONE"+c.Id);
+                if (!listOfClients.Contains(c))
                 {
                     idsToDelete.Add(c.Id);
                 }
@@ -296,15 +288,8 @@ namespace DatabaseCasinoModel
 
             foreach (Clients c in listOfClients)
             {
-                bool contains = false;
-                foreach (Clients c2 in clientsInDb)
-                {
-                    if (c2.Equals(c))
-                    {
-                        contains = true;
-                    }
-                }
-                if (!contains)
+                Console.Write("TWO" + c.Id);
+                if (!clientsInDb.Contains(c))
                 {
                     AddClient(c);
                 }
